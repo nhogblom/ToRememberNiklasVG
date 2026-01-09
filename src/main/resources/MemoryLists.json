@@ -1,0 +1,121 @@
+[ {
+  "memoryListID" : 20,
+  "notes" : [ {
+    "category" : null,
+    "description" : "sasdfas",
+    "done" : true,
+    "priorityIndex" : 3,
+    "title" : "eddd"
+  }, {
+    "category" : null,
+    "description" : "sdafasf12313",
+    "done" : false,
+    "priorityIndex" : 3,
+    "title" : "sadfasfdsaf"
+  }, {
+    "category" : null,
+    "description" : "123",
+    "done" : false,
+    "priorityIndex" : 1,
+    "title" : "Pess"
+  } ],
+  "ownerUsername" : "ivan",
+  "title" : "IvansAndraTestLista",
+  "users" : [ ]
+}, {
+  "memoryListID" : 68,
+  "notes" : [ {
+    "category" : null,
+    "description" : "1231231asdfsaf",
+    "done" : false,
+    "priorityIndex" : 2,
+    "title" : "sadkjfaskjfksd"
+  }, {
+    "category" : null,
+    "description" : "sadf123",
+    "done" : false,
+    "priorityIndex" : 2,
+    "title" : "sadfasfsadfdas1"
+  } ],
+  "ownerUsername" : "ivan",
+  "title" : "IvansTredjeTestLista",
+  "users" : [ ]
+}, {
+  "memoryListID" : 67,
+  "notes" : [ {
+    "category" : null,
+    "description" : "note 1",
+    "done" : false,
+    "priorityIndex" : 5,
+    "title" : "note 1"
+  }, {
+    "category" : null,
+    "description" : "note 2",
+    "done" : false,
+    "priorityIndex" : 3,
+    "title" : ""
+  }, {
+    "category" : null,
+    "description" : "note 3",
+    "done" : false,
+    "priorityIndex" : 1,
+    "title" : ""
+  }, {
+    "category" : null,
+    "description" : "asd",
+    "done" : false,
+    "priorityIndex" : 1,
+    "title" : ""
+  } ],
+  "ownerUsername" : "viktor",
+  "title" : "list 1",
+  "users" : [ ]
+}, {
+  "memoryListID" : 79,
+  "notes" : [ ],
+  "ownerUsername" : "viktor",
+  "title" : "list 2",
+  "users" : [ ]
+}, {
+  "memoryListID" : 26,
+  "notes" : [ ],
+  "ownerUsername" : "viktor",
+  "title" : "list 3",
+  "users" : [ ]
+}, {
+  "memoryListID" : 49,
+  "notes" : [ {
+    "category" : null,
+    "description" : "asd",
+    "done" : false,
+    "priorityIndex" : 1,
+    "title" : ""
+  } ],
+  "ownerUsername" : "viktor",
+  "title" : "asd",
+  "users" : [ ]
+}, {
+  "memoryListID" : 36,
+  "notes" : [ {
+    "category" : "sopasp",
+    "description" : "Niklasförstaanoote",
+    "done" : false,
+    "priorityIndex" : 2,
+    "title" : ""
+  } ],
+  "ownerUsername" : "Niklas",
+  "title" : "Nikllas första lista",
+  "users" : [ ]
+}, {
+  "memoryListID" : 17,
+  "notes" : [ {
+    "category" : "SNOPP",
+    "description" : "Lalalal -<",
+    "done" : false,
+    "priorityIndex" : 10,
+    "title" : ""
+  } ],
+  "ownerUsername" : "Niklas",
+  "title" : "NIklas andra lista",
+  "users" : [ ]
+} ]
