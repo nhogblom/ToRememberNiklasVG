@@ -1,7 +1,9 @@
 package team.dream.ClientSide.MVCPattern;
 
 import lombok.Data;
-import team.dream.shared.*;
+import team.dream.shared.MemoryList;
+import team.dream.shared.Message;
+import team.dream.shared.MessageType;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -12,7 +14,7 @@ import java.util.Scanner;
 public class ClientController {
     private ClientModel model;
     private View view;
-    List<MemoryList> bothOwnedAndSharedList = new ArrayList<>();
+    List<MemoryList> memoryLists = new ArrayList<>();
     Scanner scan = new Scanner(System.in);
 
     public ClientController(ClientModel model, View view) {
@@ -23,26 +25,41 @@ public class ClientController {
     private Message getInputFromChosenMemoryListAllOptions(int userChosenOption, MemoryList chosedMemoryList) throws InputMismatchException {
 
         switch (userChosenOption) {
-                case 1 -> {
-                    return NoteHelperMethods.getChosenNoteForUser(chosedMemoryList, scan, this);
-                }
-                case 2 -> {
-                    chosedMemoryList.addNoteToMemoryList(NoteHelperMethods.createNewNote(scan, this));
-                    return new Message(MessageType.CREATE_NOTE, chosedMemoryList, model.getUser());
-                }
-                case 3 -> {
-                    return NoteHelperMethods.sortNotesByPriority(chosedMemoryList, this);
-                }
-                case 4 -> {
-                    return new Message(MessageType.REMOVE_MEMORY_LIST, chosedMemoryList, model.getUser());
-                }
-                case 5 -> {
-                    return new Message(MessageType.SHOW_LIST_OF_MEMORY_LISTS, model.getUser());
-                }
-                default -> {
-                    throw new InputMismatchException();
-                }
+            case 1 -> {
+                return NoteHelperMethods.getChosenNoteForUser(chosedMemoryList, scan, this);
             }
+            case 2 -> {
+                chosedMemoryList.addNoteToMemoryList(NoteHelperMethods.createNewNote(scan, this));
+                return new Message(MessageType.CREATE_NOTE, chosedMemoryList, model.getUser());
+            }
+            case 3 -> {
+                return NoteHelperMethods.sortNotesByPriority(chosedMemoryList, this);
+            }
+            case 4 -> {
+                return new Message(MessageType.REMOVE_MEMORY_LIST, chosedMemoryList, model.getUser());
+            }
+            case 5 -> {
+                return new Message(MessageType.SHOW_LIST_OF_MEMORY_LISTS, model.getUser());
+            }
+            case 6 -> {
+                // code to share
+                String nameToShareListWith;
+                while (true) {
+                    scan.nextLine();
+                    IO.println("Enter the name of the user you want to share this list with:");
+                    nameToShareListWith = scan.nextLine().trim().toLowerCase();
+                    if (nameToShareListWith.isEmpty()) {
+                        IO.println("Please enter a valid user name.");
+                    } else {
+                        break;
+                    }
+                }
+                return new Message(MessageType.ADD_USER_TO_MEMORYLIST, chosedMemoryList, nameToShareListWith);
+            }
+            default -> {
+                throw new InputMismatchException();
+            }
+        }
 
     }
 
@@ -81,7 +98,6 @@ public class ClientController {
     public Message getInputFromChosenMemoryList(MemoryList memoryListToShow) {
         while (true) {
             try {
-
                 view.showMemoryListView(memoryListToShow);
                 view.showUserOptionForChosenMemoryListView();
                 int userChosenOption = scan.nextInt();
@@ -106,12 +122,12 @@ public class ClientController {
                 if (inputFromUser == 0) {
                     return new Message(MessageType.STARTING_MENU, model.getUser());
                 } else {
-                    bothOwnedAndSharedList.clear();
-                    bothOwnedAndSharedList.addAll(model.getUsersMemoryList());
-                    bothOwnedAndSharedList.addAll(model.getSharedMemoryList());
+                    memoryLists.clear();
+                    memoryLists.addAll(model.getUsersMemoryList());
+                    memoryLists.addAll(model.getSharedMemoryList());
 
-                    if (inputFromUser <= bothOwnedAndSharedList.size()) {
-                        return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, bothOwnedAndSharedList.get(inputFromUser - 1), model.getUser());
+                    if (inputFromUser <= memoryLists.size()) {
+                        return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, memoryLists.get(inputFromUser - 1), model.getUser());
                     } else {
                         throw new InputMismatchException();
                     }
@@ -124,4 +140,7 @@ public class ClientController {
 
     }
 
+    public void displayFreeTextToClient(String freetext) {
+        IO.println(freetext);
+    }
 }
