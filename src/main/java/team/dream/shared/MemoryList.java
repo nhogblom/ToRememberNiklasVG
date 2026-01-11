@@ -11,7 +11,7 @@ public class MemoryList implements Serializable {
     private List<Note> notes = new ArrayList<>();
     private String title;
     private String ownerUsername;
-    private List<User> users = new ArrayList<>();
+    private List<String> users = new ArrayList<>();
     private int memoryListID;
 
     public MemoryList() {}
@@ -25,6 +25,28 @@ public class MemoryList implements Serializable {
     public void addNoteToMemoryList(Note noteToAdd){
         notes.add(noteToAdd);
         IO.println("Note " + noteToAdd.getTitle() + " successfully added to " + title);
+    }
+
+    public boolean isUserAuthorized(String username){
+        if (ownerUsername.equalsIgnoreCase(username)){
+            return true;
+        }
+        for (String user : users){
+            if (user.equalsIgnoreCase(username)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean addUserToMemoryList(String userToAdd){
+        for (String user: users){
+            if (user.equals(userToAdd)){
+                return false;
+            }
+        }
+        users.add(userToAdd);
+        return true;
     }
 
 }
