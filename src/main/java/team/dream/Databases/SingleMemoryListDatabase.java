@@ -36,10 +36,12 @@ public class SingleMemoryListDatabase {
         return mapper.readValue(new File(filename), new TypeReference<List<MemoryList>>() {});
     }
 
+
+
     public ArrayList<MemoryList> getAllUsersMemoryLists(String username){
         ArrayList<MemoryList> usersMemoryLists = new ArrayList<>();
         for(MemoryList ml : memoryLists){
-            if(username.equalsIgnoreCase(ml.getOwnerUsername())){
+            if(ml.isUserAuthorized(username)){
                 usersMemoryLists.add(ml);
             }
         }
@@ -78,5 +80,17 @@ public class SingleMemoryListDatabase {
 
     private void writeMemoryListsToFile(List<MemoryList> memoryLists) {
         mapper.writerWithDefaultPrettyPrinter().writeValue(new File(filename), memoryLists);
+    }
+
+    public void updateMemoryList(MemoryList memoryListToUpdate) {
+        for (int i = 0; i < memoryLists.size(); i++) {
+            MemoryList current = memoryLists.get(i);
+
+            if (current.getMemoryListID() == memoryListToUpdate.getMemoryListID()) {
+                memoryLists.set(i, memoryListToUpdate);   // <-- detta ändrar listan
+                writeMemoryListsToFile(memoryLists);
+                break;
+            }
+        }
     }
 }
