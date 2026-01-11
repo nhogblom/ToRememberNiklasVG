@@ -17,16 +17,24 @@ public class ClientModel {
     private List<MemoryList> sharedMemoryList = new ArrayList<>();
 
 
-    ClientModel(String user){
+    ClientModel(String user) {
         this.user = user;
         //TODO här behöver vi göra så att en funktion i singleMemoryListDatabase
         // bara returnerar memory lists som tillhör user.
     }
 
-    public void updateUsersMemoryList(ArrayList<MemoryList> updatedList){
+    public void updateUsersMemoryList(ArrayList<MemoryList> updatedList) {
         usersMemoryList.clear();
-        usersMemoryList.addAll(updatedList);
-
+        for (MemoryList memoryList : updatedList) {
+            if (user.equalsIgnoreCase(memoryList.getOwnerUsername())) {
+                usersMemoryList.add(memoryList);
+            }else{
+                sharedMemoryList.add(memoryList);
+            }
+        }
     }
+
+
+
 
 }
