@@ -52,14 +52,15 @@ public class SingleClientProtocol {
             case SHOW_LIST_OF_MEMORY_LISTS -> {
                 IO.println("ClientProtocol: Show list of memory lists");
                 model.updateUsersMemoryList((ArrayList<MemoryList>) messageFromServer.getData());
-
                 return cc.getInputFromShowMemoryLists();
 
             }
             case SHOW_CHOSEN_MEMORY_LIST -> {
+                if (messageFromServer.getFreetext() != null) {
+                    cc.displayFreeTextToClient(messageFromServer.getFreetext());
+                }
                 if (messageFromServer.getData() instanceof MemoryList memoryListToShow) {
                     return cc.getInputFromChosenMemoryList(memoryListToShow);
-
                 }
             }
         }
