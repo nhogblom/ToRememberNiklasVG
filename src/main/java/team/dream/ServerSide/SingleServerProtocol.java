@@ -7,7 +7,6 @@ import team.dream.shared.MemoryList;
 import team.dream.shared.Message;
 import team.dream.shared.MessageType;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -82,6 +81,31 @@ public class SingleServerProtocol {
                     return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, updatedMemoryListWithUpdatedNote, inputFromClient.getUsername());
                 }
                 System.out.println("skipped if statement");
+            }
+
+            case ADD_USER_TO_MEMORYLIST -> {
+                IO.println(inputFromClient.getType() + " received from client");
+                if (inputFromClient.getData() instanceof MemoryList ml) {
+                    String usernameToAdd = inputFromClient.getUsername();
+                    if (userDatabase.findExistingUser(usernameToAdd) != null) {
+                        if(ml.addUserToMemoryList(usernameToAdd)) {
+                            String textToDisplay = usernameToAdd+" added to list.";
+                            singleMemoryListDatabase.updateMemoryList(ml);
+                            return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(),textToDisplay);
+                        }else{
+                            String textToDisplay = usernameToAdd+" is already addeded to this list.";
+                            return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(),textToDisplay);
+                        }
+                    }else{
+                        String textToDisplay = "User named  "+usernameToAdd+" does not exist.";
+                        return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(),textToDisplay);
+                        // send back that user does not exist.
+                    }
+                }
+            }
+
+            case REMOVE_USER_FROM_MEMORYLIST -> {
+
             }
 
             case REMOVE_MEMORY_LIST -> {
