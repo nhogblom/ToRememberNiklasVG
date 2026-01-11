@@ -24,7 +24,7 @@ public class View {
         sb.setLength(0);
         ViewHelperMethods.getAllOwnedMemoryListToStringBuilder(sb, ownedList);
         if (!sharedList.isEmpty()) {
-            sb.append(ViewHelperMethods.getAllSharedMemoryListToStringBuilder(sb, sharedList, ownedList.size()));
+            ViewHelperMethods.getAllSharedMemoryListToStringBuilder(sb, sharedList, ownedList.size()+1);
         }
 
         sb.append("Please enter index of MemoryList you would like to see, enter 0 to go back to start menu.");
@@ -39,7 +39,8 @@ public class View {
                 append("2. Create new note").append("\n").
                 append("3. Sort notes based on priority").append("\n").
                 append("4. Remove memory list").append("\n").
-                append("5. Return to view all memory lists").append("\n\n").
+                append("5. Return to view all memory lists").append("\n").
+                append("6. Share list with another user").append("\n\n").
                 append("Please enter valid index: ");
 
         IO.println(userOptionsSb);
