@@ -7,7 +7,7 @@ import java.util.List;
 public class ViewHelperMethods {
 
 
-    public static StringBuilder getAllOwnedMemoryListToStringBuilder(StringBuilder sb, List<MemoryList> ownedLists){
+    public static void getAllOwnedMemoryListToStringBuilder(StringBuilder sb, List<MemoryList> ownedLists){
         sb.append("*** Owned Lists ***").append("\n");
         for (int i = 0; i < ownedLists.size(); i++) {
             sb.append(i + 1).append(": ").
@@ -17,10 +17,9 @@ public class ViewHelperMethods {
                     append("\n");
         }
         sb.append("\n");
-        return sb;
     }
 
-    public static StringBuilder getAllSharedMemoryListToStringBuilder(StringBuilder sb, List<MemoryList> sharedLists, int startIndex){
+    public static void getAllSharedMemoryListToStringBuilder(StringBuilder sb, List<MemoryList> sharedLists, int startIndex){
         sb.append("*** Shared Lists ***").append("\n");
         for(MemoryList ml : sharedLists){
             sb.append(startIndex).append(": ").
@@ -30,7 +29,6 @@ public class ViewHelperMethods {
                     append("\n");
                     startIndex++;
         }
-        return sb;
     }
 
 }
