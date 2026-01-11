@@ -33,14 +33,12 @@ public class NoteHelperMethods {
                     IO.println("Current title: " + note.getTitle());
                     IO.println("Change title to: ");
                     userEdit = scan.nextLine();
-
                     if (!userEdit.isEmpty()) {
                         note.setTitle(userEdit);
                         break;
                     } else {
                         IO.println("---- Title can't be empty.");
                     }
-
                 }
             }
             case "description" -> {
