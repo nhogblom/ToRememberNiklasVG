@@ -88,24 +88,42 @@ public class SingleServerProtocol {
                 if (inputFromClient.getData() instanceof MemoryList ml) {
                     String usernameToAdd = inputFromClient.getUsername();
                     if (userDatabase.findExistingUser(usernameToAdd) != null) {
-                        if(ml.addUserToMemoryList(usernameToAdd)) {
-                            String textToDisplay = usernameToAdd+" added to list.";
+                        if (ml.addUserToMemoryList(usernameToAdd)) {
+                            String textToDisplay = usernameToAdd + " added to list.";
                             singleMemoryListDatabase.updateMemoryList(ml);
-                            return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(),textToDisplay);
-                        }else{
-                            String textToDisplay = usernameToAdd+" is already added to this list.";
-                            return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(),textToDisplay);
+                            return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(), textToDisplay);
+                        } else {
+                            String textToDisplay = usernameToAdd + " is already added to this list.";
+                            return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(), textToDisplay);
                         }
-                    }else{
-                        String textToDisplay = "User named  "+usernameToAdd+" does not exist.";
-                        return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(),textToDisplay);
+                    } else {
+                        String textToDisplay = "User named  " + usernameToAdd + " does not exist.";
+                        return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(), textToDisplay);
                         // send back that user does not exist.
                     }
                 }
             }
 
             case REMOVE_USER_FROM_MEMORYLIST -> {
+                IO.println(inputFromClient.getType() + " received from client");
+                if (inputFromClient.getData() instanceof MemoryList ml) {
+                    String usernameToRemove = inputFromClient.getUsername();
+                    if (userDatabase.findExistingUser(usernameToRemove) != null) {
+                        if (ml.removeUserFromMemoryList(usernameToRemove)) {
+                            String textToDisplay = usernameToRemove + " removed from list.";
+                            singleMemoryListDatabase.updateMemoryList(ml);
+                            return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(), textToDisplay);
 
+                        }else{
+                            String textToDisplay = usernameToRemove + " was not sharing this list.";
+                            return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(), textToDisplay);
+                        }
+                    } else {
+                        String textToDisplay = "User named  " + usernameToRemove + " does not exist.";
+                        return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(), textToDisplay);
+                        // send back that user does not exist.
+                    }
+                }
             }
 
             case REMOVE_MEMORY_LIST -> {

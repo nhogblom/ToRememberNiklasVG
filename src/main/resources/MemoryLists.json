@@ -39,7 +39,7 @@
   } ],
   "ownerUsername" : "ivan",
   "title" : "IvansTredjeTestLista",
-  "users" : [ ]
+  "users" : [ "niklas" ]
 }, {
   "memoryListID" : 67,
   "notes" : [ {
@@ -101,11 +101,11 @@
     "description" : "Niklasförstaanoote",
     "done" : false,
     "priorityIndex" : 2,
-    "title" : ""
+    "title" : "note title"
   } ],
   "ownerUsername" : "Niklas",
   "title" : "Nikllas första lista",
-  "users" : [ "ivan", "viktor" ]
+  "users" : [ "viktor" ]
 }, {
   "memoryListID" : 17,
   "notes" : [ {

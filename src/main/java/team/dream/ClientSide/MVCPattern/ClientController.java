@@ -42,12 +42,11 @@ public class ClientController {
                 return new Message(MessageType.SHOW_LIST_OF_MEMORY_LISTS, model.getUser());
             }
             case 6 -> {
-                // code to share
                 String nameToShareListWith;
                 while (true) {
                     scan.nextLine();
                     IO.println("Enter the name of the user you want to share this list with:");
-                    nameToShareListWith = scan.nextLine().trim().toLowerCase();
+                    nameToShareListWith = scan.nextLine().trim();
                     if (nameToShareListWith.isEmpty()) {
                         IO.println("Please enter a valid user name.");
                     } else {
@@ -55,6 +54,20 @@ public class ClientController {
                     }
                 }
                 return new Message(MessageType.ADD_USER_TO_MEMORYLIST, chosedMemoryList, nameToShareListWith);
+            }
+            case 7 -> {
+                String nameToUnshareListWith;
+                while (true) {
+                    scan.nextLine();
+                    IO.println("Enter the name of the user you want to unshare this list for:");
+                    nameToUnshareListWith = scan.nextLine().trim();
+                    if (nameToUnshareListWith.isEmpty()) {
+                        IO.println("Please enter a valid user name.");
+                    } else {
+                        break;
+                    }
+                }
+                return new Message(MessageType.REMOVE_USER_FROM_MEMORYLIST, chosedMemoryList, nameToUnshareListWith);
             }
             default -> {
                 throw new InputMismatchException();

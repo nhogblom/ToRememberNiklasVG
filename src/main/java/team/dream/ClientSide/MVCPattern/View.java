@@ -40,7 +40,8 @@ public class View {
                 append("3. Sort notes based on priority").append("\n").
                 append("4. Remove memory list").append("\n").
                 append("5. Return to view all memory lists").append("\n").
-                append("6. Share list with another user").append("\n\n").
+                append("6. Share list with another user").append("\n").
+                append("7. Unshare list from certain user.").append("\n\n").
                 append("Please enter valid index: ");
 
         IO.println(userOptionsSb);
