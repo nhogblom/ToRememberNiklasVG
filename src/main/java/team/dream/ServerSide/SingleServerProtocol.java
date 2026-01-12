@@ -93,7 +93,7 @@ public class SingleServerProtocol {
                             singleMemoryListDatabase.updateMemoryList(ml);
                             return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(),textToDisplay);
                         }else{
-                            String textToDisplay = usernameToAdd+" is already addeded to this list.";
+                            String textToDisplay = usernameToAdd+" is already added to this list.";
                             return new Message(MessageType.SHOW_CHOSEN_MEMORY_LIST, ml, inputFromClient.getUsername(),textToDisplay);
                         }
                     }else{
